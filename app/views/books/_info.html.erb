@@ -1,0 +1,71 @@
+<!--ユーザーインフォを入れる　ここから-->
+<p>
+  <h2>User info</h2>
+    <%= attachment_image_tag user, :profile_image, :fill, 100, 100, fallback: "no_image.jpg"%>
+</p>
+   <table class="table">
+    <tbody>
+     <tr>
+       <th>Name</th>
+       <th><%= user.name %></th>
+     </tr>
+     <tr>
+       <th>Introduction</th>
+       <th><%= user.introduction %></th>
+     </tr>
+
+ <!--ユーザーインフォを入れる　ここまで-->
+
+
+
+<!-- _user_infoに書く
+User infoのところのfollowsとfollowersのところの
+数字がリンクになっていてそこからページ遷移する -->
+     <tr>
+      <th>
+        follows   <%= link_to user_followings_path(user.id) do %>
+          <%= user.followings.count %>
+        <% end %>
+      </th>
+     </tr>
+     <tr>
+      <th>
+        followers  <%= link_to  user_followers_path(user.id) do %>
+          <%= user.followers.count %>
+        <% end %>
+      </th>
+     </tr>
+
+
+    </tbody>
+   </table>
+
+<!-- フォローボタン -->
+<!--ボタンはブートストラップからフォローはミドリ、フォローを外すは水色、pathのカッコの後ろにclass = "ボタン"-->
+<!--ユーザーが現在ユーザーなら表示させない-->
+<% if user != current_user %>
+  <% if current_user.following?(user) %>
+    <%= link_to user_relationships_path(user.id), method: :delete do %>
+        <button type="button" class="btn btn-success mb-4">フォローを外す</button>
+    <% end %>
+  <% else %>
+    <%#= link_to "フォローする", user_relationships_path(user.id), method: :post %>
+    <%= link_to user_relationships_path(user.id), method: :post do %>
+        <button type="button" class="btn btn-info mb-4">フォローする</button>
+    <% end %>
+  <% end %>
+<% end %>
+
+
+
+
+
+ <!--編集用ボタン-->
+   <div class="row">
+   <%# if user.id == current_user.id %>
+    <%= link_to edit_user_path(user.id), class: "btn btn-outline-secondary btn-block" do %>
+     <i class="fas fa-user-cog"></i>
+    <%# end %>
+
+    <% end %>
+   </div>
