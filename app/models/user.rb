@@ -22,18 +22,34 @@ class User < ApplicationRecord
 
 
 
-def follow(user_id)
-  relationships.create(followed_id: user_id)
-end
+  def follow(user_id)
+    relationships.create(followed_id: user_id)
+  end
 
-def unfollow(user_id)
-  relationships.find_by(followed_id: user_id).destroy
-end
+  def unfollow(user_id)
+    relationships.find_by(followed_id: user_id).destroy
+  end
 
-def following?(user)
-  followings.include?(user)
-end
+  def following?(user)
+    followings.include?(user)
+  end
 
+
+  # 検索機能　ここから
+  def self.search(search,word)
+    if search == "forward_match"
+      @user = User.where("name LIKE?","#{word}%")
+    elsif search == "backward_match"
+      @user = User.where("name LIKE?","%#{word}")
+    elsif search == "perfect_match"
+      @user = User.where("#{word}")
+    elsif search == "partial_match"
+      @user = User.where("name LIKE?","%#{word}%")
+    else
+      @user = User.all
+    end
+  end
+  # 検索機能　ここまで
 
   validates :name, presence: true
   validates :name, uniqueness: true
