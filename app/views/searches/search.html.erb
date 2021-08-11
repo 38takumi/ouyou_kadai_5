@@ -1,5 +1,5 @@
 <% if @range == '2' %>
-<h2>Books search for "<%= f.text_field :word %>"</h2>
+<h2>Books search for "<%= @word %>"</h2>
 <!--books一覧 -->
 <table class="table table-hover table-inverse">
   <thead>
@@ -30,7 +30,7 @@
 
   <% else %>
   <!--users一覧-->
-  <h2>Users search for "<%= f.text_field :word %>"</h2>
+  <h2>Users search for "<%= @word %>"</h2>
   <table class="table table-hover table-inverse">
    <thead>
      <tr>

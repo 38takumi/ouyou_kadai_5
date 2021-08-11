@@ -73,13 +73,27 @@
       <main>
           <!--検索機能-->
         <% if user_signed_in? %>
-         <%= form_tag(search_path, method: :get) do %>
-          <%= text_field_tag (:word) %>
-        　<%= select_tag 'range' ,options_for_select([['---選択してください---', ''], ['User', '1'], ['Book', '2']]) %>
-          <%= select_tag 'search', options_for_select([["前方一致","forward_match"], ["後方一致","backward_match"], ["完全一致","perfect_match"], ["部分一致","partial_match"]]) %>
-          <%= submit_tag "検索" %>
-         <% end %>
-        <% end %>
+        <table class="table" >
+          <tbody>
+           <%= form_tag(search_path, method: :get) do %>
+            <td class:"mt-2">
+            <!--<div class:"mt-2">-->
+              <%= text_field_tag (:word) %>
+            <!--</div>-->
+            </td>
+            <td>
+              <%= select_tag 'range' ,options_for_select([['---選択してください---', ''], ['User', '1'], ['Book', '2']]), class:"mt-2" %>
+            </td>
+            <td>
+              <%= select_tag 'search', options_for_select([["前方一致","forward_match"], ["後方一致","backward_match"], ["完全一致","perfect_match"], ["部分一致","partial_match"]]), class:"mt-2" %>
+            </td>
+            <td>
+              <%= submit_tag "検索", class:"mt-2" %>
+            </td>
+           <% end %>
+          <% end %>
+        </tbody>
+      </table>
 
           <%= yield %>
 
