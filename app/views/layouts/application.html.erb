@@ -82,7 +82,7 @@
             <!--</div>-->
             </td>
             <td>
-              <%= select_tag 'range' ,options_for_select([['---選択してください---', ''], ['User', '1'], ['Book', '2']]), class:"mt-2" %>
+              <%= select_tag 'range' ,options_for_select([['User', '1'], ['Book', '2']]), class:"mt-2" %>
             </td>
             <td>
               <%= select_tag 'search', options_for_select([["前方一致","forward_match"], ["後方一致","backward_match"], ["完全一致","perfect_match"], ["部分一致","partial_match"]]), class:"mt-2" %>
